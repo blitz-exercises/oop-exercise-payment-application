@@ -1,0 +1,161 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+
+language: en-US
+tone_instructions: "Be concise and focus on critical issues only"
+early_access: false
+enable_free_tier: true
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_placeholder: '@coderabbitai summary'
+  auto_title_placeholder: '@coderabbitai'
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+
+  path_filters:
+    - "src/**"
+
+  path_instructions:
+    - path: "src/main/java/**"
+      instructions: |
+        nl.blitz.oop.payable exercise — apply these during review:
+
+        • Package hygiene
+          - All classes declare: package nl.blitz.oop.payable;
+
+        • Files / Interfaces / Classes
+          - Required files:
+              src/main/java/nl/blitz/oop/payable/Payable.java
+              src/main/java/nl/blitz/oop/payable/HourlyEmployee.java
+              src/main/java/nl/blitz/oop/payable/Contractor.java
+              src/main/java/nl/blitz/oop/payable/InvoiceItem.java
+              src/main/java/nl/blitz/oop/payable/Demo.java
+          - Payable.java declares: public interface Payable with:
+              double calculatePay();
+              String printLine();
+
+        • Inheritance / Implementation
+          - HourlyEmployee implements Payable
+          - Contractor implements Payable
+          - InvoiceItem implements Payable
+
+        • Encapsulation
+          - All fields are private
+          - No public mutable fields anywhere under nl.blitz.oop.payable
+
+        • Constructors (presence)
+          - HourlyEmployee(String, double, double)
+          - Contractor(String, double, double)
+          - InvoiceItem(String, double, int)
+
+        • Validation expectations (behavioral)
+          - Names/descriptions non-null/non-blank
+          - Rates/prices > 0
+          - Hours/days >= 0
+          - Quantity >= 0
+          - Implementations should throw IllegalArgumentException on invalid inputs
+            (exact messages not enforced)
+
+        • Implementation (must be present; no placeholders)
+          - All getters return values
+          - calculatePay() returns correct amount
+          - printLine() returns a single, human-readable line per item
+          - Methods must NOT throw UnsupportedOperationException
+
+        • Polymorphism in Demo
+          - Demo.main builds a List<Payable> with mixed items
+          - Iterates and prints each line via printLine()
+          - Sums total using calculatePay()
+          - No instanceof checks
+
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    ignore_title_keywords:
+      - "wip"
+      - "draft"
+    labels: []
+    drafts: false
+    base_branches: []
+
+pre_merge_checks:
+  title:
+    mode: warning
+    requirements: "Title should be concise and descriptive"
+  description:
+    mode: warning
+  issue_assessment:
+    mode: warning
+
+  custom_checks:
+    - mode: error
+      name: "Files exist"
+      instructions: >
+        Fail if any required file is missing or mislocated.
+
+    - mode: error
+      name: "Package hygiene"
+      instructions: >
+        Fail if any class does not declare 'package nl.blitz.oop.payable;'.
+
+    - mode: error
+      name: "Interface contract"
+      instructions: >
+        Fail if Payable.java does not declare both methods:
+        'double calculatePay();' and 'String printLine();'.
+
+    - mode: error
+      name: "Implementation and encapsulation"
+      instructions: >
+        Fail if fields are not private, or any method returns placeholder exceptions.
+        All Payable implementations must provide calculatePay() and printLine().
+
+    - mode: error
+      name: "Constructor presence and validation"
+      instructions: >
+        Fail if a listed constructor signature is missing, or if constructors lack reasonable validation
+        and IllegalArgumentException on invalid input.
+
+    - mode: error
+      name: "Polymorphism in Demo"
+      instructions: >
+        Fail if Demo does not construct a List<Payable> with mixed implementations, print each line,
+        and compute a grand total by summing calculatePay() without instanceof checks.
+
+tools:
+  github-checks:
+    enabled: true
+    timeout_ms: 90000
+  markdownlint:
+    enabled: true
+  yamllint:
+    enabled: true
+  gitleaks:
+    enabled: true
+  pmd:
+    enabled: true
+  semgrep:
+    enabled: true
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  opt_out: false
+  web_search:
+    enabled: true
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "**/.cursorrules"
+      - "**/CODING_STANDARDS.md"
+
+code_generation:
+  docstrings:
+    language: en-US
+  unit_tests:
+    path_instructions: []
+
