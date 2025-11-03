@@ -1,8 +1,9 @@
 package nl.blitz.oop.payable;
 
 public interface Payable {
-    double calculatePay();
 
+    double calculatePay();
     String printLine();
+
 }
 

@@ -2,9 +2,16 @@
 
 ## Story
 
-Blitz Creative Studio has grown from a two-person outfit into a bustling team that mixes full-time staff, freelancers, and one-off vendor invoices. Their finance lead, Mira, faces the same headache every Friday: everyone expects money, but the spreadsheets never match. Some contributors are hourly and must be paid strictly for the hours approved; contractors charge by the day on fixed engagements; and occasionally the studio purchases assets (fonts, sample packs, stock video) on unit-price × quantity invoices. Each of these ends up in a different tab with different formulas. When a project is hot, people add columns, rename headers, and copy-paste formulas that stop working the following week.
+Blitz Creative Studio has grown from a two-person outfit into a bustling team that mixes full-time staff, 
+freelancers, and one-off vendor invoices. Their finance lead, Mira, faces the same headache every Friday: 
+everyone expects money, but the spreadsheets never match. Some contributors are hourly and must be paid 
+strictly for the hours approved; contractors charge by the day on fixed engagements; and occasionally the 
+studio purchases assets (fonts, sample packs, stock video) on unit-price × quantity invoices. Each of these 
+ends up in a different tab with different formulas. When a project is hot, people add columns, rename headers, 
+and copy-paste formulas that stop working the following week.
 
-Leadership wants a single payment pipeline that works for any kind of "thing that gets paid." Mira doesn't want to know what a contributor is—she just wants to ask two questions:
+Leadership wants a single payment pipeline that works for any kind of "thing that gets paid." Mira doesn't want 
+to know what a contributor is—she just wants to ask two questions:
 
 1. How much do we owe?
 2. What line should I print on the weekly payout report?
@@ -21,14 +28,16 @@ No more "if this is a freelancer do X, if that's an invoice do Y." The report lo
 
 ### Constraints from Finance:
 
-- Numbers must make sense: rates must be positive, hours/days/quantities must be non-negative, and descriptions must not be blank.
+- Numbers must make sense: rates must be positive, hours/days/quantities must be non-negative, 
+and descriptions must not be blank.
 - Hourly workers submit approved hours for the week and a rate.
 - Contractors submit approved days for the week and a day rate.
 - Invoices list a description, unit price, and quantity.
 - Every payable must produce a single-line summary that Mira can paste into the payout report, e.g.:
   - `HourlyEmployee[A. Novak]: 32.0 h × 40.0 = 1280.0`
 - The top-level report must compute the grand total by asking each item the same question (no special cases).
-- The architecture must be extensible: if next quarter they add "royalties" or "revenue share," the report code should not change.
+- The architecture must be extensible: if next quarter they add "royalties" or "revenue share," the report code 
+- should not change.
 
 ### Implementation Requirements:
 
