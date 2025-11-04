@@ -19,7 +19,7 @@ public class Demo {
         double total = 0;
         for (Payable payable : payables) {
             System.out.println(payable.printLine());
-            total =+ payable.calculatePay();
+            total += payable.calculatePay();
         }
         System.out.println("total: " + total);
     }

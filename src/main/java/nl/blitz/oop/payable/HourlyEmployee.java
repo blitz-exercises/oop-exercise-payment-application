@@ -8,7 +8,7 @@ public class HourlyEmployee implements Payable {
 
     public HourlyEmployee(String name, double hourlyRate, double approvedHours) {
         // throw new UnsupportedOperationException();
-        if (name.isBlank() || name == null) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Name cannot be empty");
         } else if (hourlyRate <= 0) {
             throw new IllegalArgumentException("hourly rate must be higher than 0");

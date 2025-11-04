@@ -8,7 +8,7 @@ public class Contractor implements Payable {
 
     public Contractor(String name, double dayRate, double approvedDays) {
         // throw new UnsupportedOperationException();
-        if (name.isBlank() || name == null) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Name cannot be empty");
         }
         if (dayRate <= 0) {

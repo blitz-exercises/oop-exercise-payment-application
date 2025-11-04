@@ -8,7 +8,7 @@ public class InvoiceItem implements Payable {
 
     public InvoiceItem(String description, double unitPrice, int quantity) {
         // throw new UnsupportedOperationException();
-        if (description.isBlank() || description == null) {
+        if (description == null || description.isBlank()) {
             throw new IllegalArgumentException("Description cannot be empty");
         }
         if (unitPrice <= 0) {
