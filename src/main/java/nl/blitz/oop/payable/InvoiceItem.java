@@ -7,29 +7,44 @@ public class InvoiceItem implements Payable {
     private int quantity;
 
     public InvoiceItem(String description, double unitPrice, int quantity) {
-        throw new UnsupportedOperationException();
+        if (description == null || description.isBlank()) {
+            throw new IllegalArgumentException("Description cannot be empty.");
+        }
+
+        if (unitPrice <= 0) {
+            throw new IllegalArgumentException("Unit price must be greater than 0.");
+        }
+
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative.");
+        }
+
+        this.description = description;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
     }
 
     public String getDescription() {
-        throw new UnsupportedOperationException();
+        return description;
     }
 
     public double getUnitPrice() {
-        throw new UnsupportedOperationException();
+        return unitPrice;
     }
 
     public int getQuantity() {
-        throw new UnsupportedOperationException();
+        return quantity;
     }
 
     @Override
     public double calculatePay() {
-        throw new UnsupportedOperationException();
+        return unitPrice * quantity;
     }
 
     @Override
     public String printLine() {
-        throw new UnsupportedOperationException();
+        return "InvoiceItem[" + description + "]: " +
+               quantity + " × " + unitPrice + " = " + calculatePay();
     }
 }
 
