@@ -2,34 +2,51 @@ package nl.blitz.oop.payable;
 
 public class HourlyEmployee implements Payable {
 
-    private String name;
+    private final String name;
     private double hourlyRate;
     private double approvedHours;
 
     public HourlyEmployee(String name, double hourlyRate, double approvedHours) {
-        throw new UnsupportedOperationException();
+        if(name == null || name.isBlank()){
+            throw new IllegalArgumentException("Name cannot be empty.");
+        }
+
+        if(hourlyRate < 0){
+            throw new IllegalArgumentException("Hourly rate cannot be less then 0.");
+        }
+
+        if(approvedHours <= 0){
+            throw new IllegalArgumentException("Approved hours cannot be a negative number.");
+        }
+
+        this.name = name;
+        this.hourlyRate = hourlyRate;
+        this.approvedHours = approvedHours;
     }
 
     public String getName() {
-        throw new UnsupportedOperationException();
+        return name;
     }
 
     public double getHourlyRate() {
-        throw new UnsupportedOperationException();
+        return hourlyRate;
     }
 
     public double getApprovedHours() {
-        throw new UnsupportedOperationException();
+        return approvedHours;
     }
 
     @Override
     public double calculatePay() {
-        throw new UnsupportedOperationException();
+        return hourlyRate * approvedHours;
     }
 
     @Override
     public String printLine() {
-        throw new UnsupportedOperationException();
+        return "HourlyEmployee[" + name + "]: " +
+                hourlyRate + " h x " +
+                approvedHours + " = " +
+                calculatePay();
     }
 }
 
