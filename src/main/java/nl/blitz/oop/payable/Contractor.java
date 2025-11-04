@@ -11,7 +11,7 @@ public class Contractor implements Payable {
             throw new IllegalArgumentException("Name cannot be empty.");
         }
 
-        if(dayRate < 0){
+        if(dayRate <= 0){
             throw new IllegalArgumentException("Day rate cannot be less then 0.");
         }
 

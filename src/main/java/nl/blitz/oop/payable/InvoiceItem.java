@@ -11,7 +11,7 @@ public class InvoiceItem implements Payable {
             throw new IllegalArgumentException("Description cannot be empty.");
         }
 
-        if (unitPrice < 0) {
+        if (unitPrice <= 0) {
             throw new IllegalArgumentException("Unit price must be greater than 0.");
         }
 

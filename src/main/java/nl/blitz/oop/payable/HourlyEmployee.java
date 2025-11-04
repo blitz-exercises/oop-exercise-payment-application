@@ -11,7 +11,7 @@ public class HourlyEmployee implements Payable {
             throw new IllegalArgumentException("Name cannot be empty.");
         }
 
-        if(hourlyRate < 0){
+        if(hourlyRate <= 0){
             throw new IllegalArgumentException("Hourly rate cannot be less then 0.");
         }
 
